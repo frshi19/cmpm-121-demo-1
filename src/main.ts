@@ -11,30 +11,30 @@ app.append(header);
 
 let counter: number = 0;
 
-const counterDiv: HTMLDivElement = document.createElement('div');
-counterDiv.id = 'counterDisplay';
+const counterDiv: HTMLDivElement = document.createElement("div");
+counterDiv.id = "counterDisplay";
 updateCounterDisplay(counterDiv);
 
 // Append the counterDiv to the app element
-const appDiv: HTMLElement | null = document.getElementById('app');
+const appDiv: HTMLElement | null = document.getElementById("app");
 if (appDiv) {
-    appDiv.appendChild(counterDiv);
+  appDiv.appendChild(counterDiv);
 }
 
 function updateCounterDisplay(div: HTMLDivElement) {
   if (counter == 1) {
     div.innerHTML = `${counter} steak`;
-  }
-  else {
+  } else {
     div.innerHTML = `${counter} steaks`;
-  } 
+  }
 }
 
 function incrementCounter() {
   counter += 1;
-  const counterDiv: HTMLElement | null = document.getElementById('counterDisplay');
+  const counterDiv: HTMLElement | null =
+    document.getElementById("counterDisplay");
   if (counterDiv) {
-      updateCounterDisplay(counterDiv as HTMLDivElement);
+    updateCounterDisplay(counterDiv as HTMLDivElement);
   }
 }
 
@@ -44,4 +44,3 @@ button.onclick = incrementCounter;
 if (appDiv) {
   appDiv.appendChild(button);
 }
-
