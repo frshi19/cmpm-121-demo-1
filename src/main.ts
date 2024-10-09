@@ -10,6 +10,8 @@ header.innerHTML = gameName;
 app.append(header);
 
 let counter: number = 0;
+let lastTimestamp: number = performance.now();
+const incrementPerSecond: number = 1;
 
 const counterDiv: HTMLDivElement = document.createElement("div");
 counterDiv.id = "counterDisplay";
@@ -22,10 +24,10 @@ if (appDiv) {
 }
 
 function updateCounterDisplay(div: HTMLDivElement) {
-  if (counter == 1) {
-    div.innerHTML = `${counter} steak`;
+  if (Math.floor(counter) == 1) {
+    div.innerHTML = `${Math.floor(counter)} steak`;
   } else {
-    div.innerHTML = `${counter} steaks`;
+    div.innerHTML = `${Math.floor(counter)} steaks`;
   }
 }
 
@@ -45,4 +47,16 @@ if (appDiv) {
   appDiv.appendChild(button);
 }
 
-setInterval(incrementCounter, 1000);
+function continuousGrowth() {
+  const currentTimestamp = performance.now();
+  const delta = currentTimestamp - lastTimestamp; // Calculate time elapsed
+  const increment = (incrementPerSecond * delta) / 1000; // Calculate frame-based increment
+  counter += increment;
+
+  updateCounterDisplay(counterDiv); // Update counter display
+
+  lastTimestamp = currentTimestamp;
+  requestAnimationFrame(continuousGrowth); // Request next frame
+}
+
+requestAnimationFrame(continuousGrowth); 
