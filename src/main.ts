@@ -14,6 +14,12 @@ let counter: number = 0;
 let lastTimestamp: number = performance.now();
 const incrementPerSecond: number = 1;
 let growthRate: number = 0;
+const upgradeACost = 10;
+const upgradeBCost = 100;
+const upgradeCCost = 1000;
+let upgradeACount = 0;
+let upgradeBCount = 0;
+let upgradeCCount = 0;
 
 // create counter display
 const counterDiv: HTMLDivElement = document.createElement("div");
@@ -56,9 +62,24 @@ if (appDiv) {
 }
 
 // function to increate the growth rate
-function increaseGrowthRate() {
-  growthRate += 1;
-  counter -= 10;
+function increaseGrowthRate(amount: number, cost: number) {
+  growthRate += amount;
+  counter -= cost;
+}
+
+// create status div
+const statusDiv: HTMLDivElement = document.createElement("div");
+statusDiv.id = "status"
+
+if (appDiv) {
+  appDiv.appendChild(statusDiv);
+}
+
+statusDiv.innerHTML = `per second: ${growthRate}`;
+
+// function for updating status display
+function updateStatusDisplay(div: HTMLDivElement) {
+  div.innerHTML = `per second: ${growthRate}`;
 }
 
 // create upgrade div
@@ -70,14 +91,47 @@ if (appDiv) {
   appDiv.appendChild(upgradeDiv);
 }
 
-// create upgrade button
-const upgradeButton: HTMLButtonElement = document.createElement("button");
-upgradeButton.innerHTML = "Butcher";
-if (appDiv) {
-  upgradeDiv.appendChild(upgradeButton);
+function updateUpgradeDisplay(div: HTMLButtonElement, upgradeName: string, count: number) {
+  div.innerHTML = `${upgradeName} (Count: ${count})`
 }
-upgradeButton.addEventListener("click", () => {
-  increaseGrowthRate();
+
+// create upgrade button A
+const upgradeButtonA: HTMLButtonElement = document.createElement("button");
+updateUpgradeDisplay(upgradeButtonA, "Butcher", upgradeACount)
+if (appDiv) {
+  upgradeDiv.appendChild(upgradeButtonA);
+}
+upgradeButtonA.addEventListener("click", () => {
+  increaseGrowthRate(0.1, upgradeACost);
+  updateStatusDisplay(statusDiv);
+  upgradeACount += 1;
+  updateUpgradeDisplay(upgradeButtonA, "Butcher", upgradeACount)
+});
+
+// create upgrade button B
+const upgradeButtonB: HTMLButtonElement = document.createElement("button");
+updateUpgradeDisplay(upgradeButtonB, "Farm", upgradeBCount)
+if (appDiv) {
+  upgradeDiv.appendChild(upgradeButtonB);
+}
+upgradeButtonB.addEventListener("click", () => {
+  increaseGrowthRate(2.0, upgradeBCost);
+  updateStatusDisplay(statusDiv);
+  upgradeBCount += 1;
+  updateUpgradeDisplay(upgradeButtonB, "Farm", upgradeBCount)
+});
+
+// create upgrade button C
+const upgradeButtonC: HTMLButtonElement = document.createElement("button");
+updateUpgradeDisplay(upgradeButtonC, "Steak House", upgradeCCount)
+if (appDiv) {
+  upgradeDiv.appendChild(upgradeButtonC);
+}
+upgradeButtonC.addEventListener("click", () => {
+  increaseGrowthRate(50, upgradeCCost);
+  updateStatusDisplay(statusDiv);
+  upgradeCCount += 1;
+  updateUpgradeDisplay(upgradeButtonC, "Steak House", upgradeCCount)
 });
 
 // Increments steak
@@ -92,11 +146,25 @@ function continuousGrowth() {
   lastTimestamp = currentTimestamp;
   requestAnimationFrame(continuousGrowth); // Request next frame
 
-  // check if upgrade is available
-  if (counter < 10) {
-    upgradeButton.disabled = true;
-  } else if (counter >= 10) {
-    upgradeButton.disabled = false;
+  // check if upgrade A is available
+  if (counter < upgradeACost) {
+    upgradeButtonA.disabled = true;
+  } else if (counter >= upgradeACost) {
+    upgradeButtonA.disabled = false;
+  }
+
+  // check if upgrade B is available
+  if (counter < upgradeBCost) {
+    upgradeButtonB.disabled = true;
+  } else if (counter >= upgradeBCost) {
+    upgradeButtonB.disabled = false;
+  }
+
+  // check if upgrade C is available
+  if (counter < upgradeCCost) {
+    upgradeButtonC.disabled = true;
+  } else if (counter >= upgradeCCost) {
+    upgradeButtonC.disabled = false;
   }
 }
 
