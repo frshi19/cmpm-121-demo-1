@@ -69,7 +69,7 @@ function increaseGrowthRate(amount: number, cost: number) {
 
 // create status div
 const statusDiv: HTMLDivElement = document.createElement("div");
-statusDiv.id = "status"
+statusDiv.id = "status";
 
 if (appDiv) {
   appDiv.appendChild(statusDiv);
@@ -91,13 +91,17 @@ if (appDiv) {
   appDiv.appendChild(upgradeDiv);
 }
 
-function updateUpgradeDisplay(div: HTMLButtonElement, upgradeName: string, count: number) {
-  div.innerHTML = `${upgradeName} (Count: ${count})`
+function updateUpgradeDisplay(
+  div: HTMLButtonElement,
+  upgradeName: string,
+  count: number,
+) {
+  div.innerHTML = `${upgradeName} (Count: ${count})`;
 }
 
 // create upgrade button A
 const upgradeButtonA: HTMLButtonElement = document.createElement("button");
-updateUpgradeDisplay(upgradeButtonA, "Butcher", upgradeACount)
+updateUpgradeDisplay(upgradeButtonA, "Butcher", upgradeACount);
 if (appDiv) {
   upgradeDiv.appendChild(upgradeButtonA);
 }
@@ -105,12 +109,12 @@ upgradeButtonA.addEventListener("click", () => {
   increaseGrowthRate(0.1, upgradeACost);
   updateStatusDisplay(statusDiv);
   upgradeACount += 1;
-  updateUpgradeDisplay(upgradeButtonA, "Butcher", upgradeACount)
+  updateUpgradeDisplay(upgradeButtonA, "Butcher", upgradeACount);
 });
 
 // create upgrade button B
 const upgradeButtonB: HTMLButtonElement = document.createElement("button");
-updateUpgradeDisplay(upgradeButtonB, "Farm", upgradeBCount)
+updateUpgradeDisplay(upgradeButtonB, "Farm", upgradeBCount);
 if (appDiv) {
   upgradeDiv.appendChild(upgradeButtonB);
 }
@@ -118,12 +122,12 @@ upgradeButtonB.addEventListener("click", () => {
   increaseGrowthRate(2.0, upgradeBCost);
   updateStatusDisplay(statusDiv);
   upgradeBCount += 1;
-  updateUpgradeDisplay(upgradeButtonB, "Farm", upgradeBCount)
+  updateUpgradeDisplay(upgradeButtonB, "Farm", upgradeBCount);
 });
 
 // create upgrade button C
 const upgradeButtonC: HTMLButtonElement = document.createElement("button");
-updateUpgradeDisplay(upgradeButtonC, "Steak House", upgradeCCount)
+updateUpgradeDisplay(upgradeButtonC, "Steak House", upgradeCCount);
 if (appDiv) {
   upgradeDiv.appendChild(upgradeButtonC);
 }
@@ -131,7 +135,7 @@ upgradeButtonC.addEventListener("click", () => {
   increaseGrowthRate(50, upgradeCCost);
   updateStatusDisplay(statusDiv);
   upgradeCCount += 1;
-  updateUpgradeDisplay(upgradeButtonC, "Steak House", upgradeCCount)
+  updateUpgradeDisplay(upgradeButtonC, "Steak House", upgradeCCount);
 });
 
 // Increments steak
