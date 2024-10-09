@@ -48,7 +48,9 @@ function incrementCounter() {
 // create the button
 const button: HTMLButtonElement = document.createElement("button");
 button.innerHTML = "🥩";
-button.onclick = incrementCounter;
+button.addEventListener("click", () => {
+  incrementCounter();
+});
 if (appDiv) {
   appDiv.appendChild(button);
 }
@@ -74,7 +76,9 @@ upgradeButton.innerHTML = "Butcher";
 if (appDiv) {
   upgradeDiv.appendChild(upgradeButton);
 }
-upgradeButton.onclick = increaseGrowthRate;
+upgradeButton.addEventListener("click", () => {
+  increaseGrowthRate();
+});
 
 // Increments steak
 function continuousGrowth() {
