@@ -79,7 +79,7 @@ statusDiv.innerHTML = `per second: ${growthRate}`;
 
 // function for updating status display
 function updateStatusDisplay(div: HTMLDivElement) {
-  div.innerHTML = `per second: ${Math.trunc(growthRate*100)/100}`;
+  div.innerHTML = `per second: ${Math.trunc(growthRate * 100) / 100}`;
 }
 
 // create upgrade div
@@ -95,9 +95,9 @@ function updateUpgradeDisplay(
   div: HTMLButtonElement,
   upgradeName: string,
   count: number,
-  cost: number
+  cost: number,
 ) {
-  div.innerHTML = `${upgradeName} (Count: ${count}) (Cost: ${Math.trunc(cost*100)/100})`;
+  div.innerHTML = `${upgradeName} (Count: ${count}) (Cost: ${Math.trunc(cost * 100) / 100})`;
 }
 
 // create upgrade button A
@@ -130,7 +130,12 @@ upgradeButtonB.addEventListener("click", () => {
 
 // create upgrade button C
 const upgradeButtonC: HTMLButtonElement = document.createElement("button");
-updateUpgradeDisplay(upgradeButtonC, "Steak House", upgradeCCount, upgradeCCost);
+updateUpgradeDisplay(
+  upgradeButtonC,
+  "Steak House",
+  upgradeCCount,
+  upgradeCCost,
+);
 if (appDiv) {
   upgradeDiv.appendChild(upgradeButtonC);
 }
@@ -139,7 +144,12 @@ upgradeButtonC.addEventListener("click", () => {
   updateStatusDisplay(statusDiv);
   upgradeCCount += 1;
   upgradeCCost *= 1.15;
-  updateUpgradeDisplay(upgradeButtonC, "Steak House", upgradeCCount, upgradeCCost);
+  updateUpgradeDisplay(
+    upgradeButtonC,
+    "Steak House",
+    upgradeCCount,
+    upgradeCCost,
+  );
 });
 
 // Increments steak
