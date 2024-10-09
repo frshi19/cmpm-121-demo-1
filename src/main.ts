@@ -59,4 +59,4 @@ function continuousGrowth() {
   requestAnimationFrame(continuousGrowth); // Request next frame
 }
 
-requestAnimationFrame(continuousGrowth); 
+requestAnimationFrame(continuousGrowth);
