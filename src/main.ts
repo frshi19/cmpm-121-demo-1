@@ -70,7 +70,7 @@ if (appDiv) {
 
 // create upgrade button
 const upgradeButton: HTMLButtonElement = document.createElement("button");
-upgradeButton.innerHTML = "Butcher"
+upgradeButton.innerHTML = "Butcher";
 if (appDiv) {
   upgradeDiv.appendChild(upgradeButton);
 }
@@ -91,8 +91,7 @@ function continuousGrowth() {
   // check if upgrade is available
   if (counter < 10) {
     upgradeButton.disabled = true;
-  }
-  else if (counter >= 10) {
+  } else if (counter >= 10) {
     upgradeButton.disabled = false;
   }
 }
