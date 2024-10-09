@@ -44,3 +44,5 @@ button.onclick = incrementCounter;
 if (appDiv) {
   appDiv.appendChild(button);
 }
+
+setInterval(incrementCounter, 1000)
