@@ -45,4 +45,4 @@ if (appDiv) {
   appDiv.appendChild(button);
 }
 
-setInterval(incrementCounter, 1000)
+setInterval(incrementCounter, 1000);
