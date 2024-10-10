@@ -9,14 +9,26 @@ const header = document.createElement("h1");
 header.innerHTML = gameName;
 app.append(header);
 
+// step 9 code
+interface Item {
+  name: string,
+  cost: number,
+  rate: number
+};
+
+const availableItems : Item[] = [
+  {name: "Butcher", cost: 10, rate: 0.1},
+  {name: "Farm", cost: 100, rate: 2},
+  {name: "Steak House", cost: 1000, rate: 50},
+];
+
+
 // global variables
 let counter: number = 0;
 let lastTimestamp: number = performance.now();
 const incrementPerSecond: number = 1;
 let growthRate: number = 0;
-let upgradeACost = 10;
-let upgradeBCost = 100;
-let upgradeCCost = 1000;
+
 let upgradeACount = 0;
 let upgradeBCount = 0;
 let upgradeCCount = 0;
@@ -102,30 +114,30 @@ function updateUpgradeDisplay(
 
 // create upgrade button A
 const upgradeButtonA: HTMLButtonElement = document.createElement("button");
-updateUpgradeDisplay(upgradeButtonA, "Butcher", upgradeACount, upgradeACost);
+updateUpgradeDisplay(upgradeButtonA, availableItems[0].name, upgradeACount, availableItems[0].cost);
 if (appDiv) {
   upgradeDiv.appendChild(upgradeButtonA);
 }
 upgradeButtonA.addEventListener("click", () => {
-  increaseGrowthRate(0.1, upgradeACost);
+  increaseGrowthRate(availableItems[0].rate, availableItems[0].cost);
   updateStatusDisplay(statusDiv);
   upgradeACount += 1;
-  upgradeACost *= 1.15;
-  updateUpgradeDisplay(upgradeButtonA, "Butcher", upgradeACount, upgradeACost);
+  availableItems[0].cost *= 1.15;
+  updateUpgradeDisplay(upgradeButtonA, availableItems[0].name, upgradeACount, availableItems[0].cost);
 });
 
 // create upgrade button B
 const upgradeButtonB: HTMLButtonElement = document.createElement("button");
-updateUpgradeDisplay(upgradeButtonB, "Farm", upgradeBCount, upgradeBCost);
+updateUpgradeDisplay(upgradeButtonB, "Farm", upgradeBCount, availableItems[1].cost);
 if (appDiv) {
   upgradeDiv.appendChild(upgradeButtonB);
 }
 upgradeButtonB.addEventListener("click", () => {
-  increaseGrowthRate(2.0, upgradeBCost);
+  increaseGrowthRate(availableItems[1].rate, availableItems[1].cost);
   updateStatusDisplay(statusDiv);
   upgradeBCount += 1;
-  upgradeBCost *= 1.15;
-  updateUpgradeDisplay(upgradeButtonB, "Farm", upgradeBCount, upgradeBCost);
+  availableItems[1].cost *= 1.15;
+  updateUpgradeDisplay(upgradeButtonB, "Farm", upgradeBCount, availableItems[1].cost);
 });
 
 // create upgrade button C
@@ -134,21 +146,21 @@ updateUpgradeDisplay(
   upgradeButtonC,
   "Steak House",
   upgradeCCount,
-  upgradeCCost,
+  availableItems[2].cost,
 );
 if (appDiv) {
   upgradeDiv.appendChild(upgradeButtonC);
 }
 upgradeButtonC.addEventListener("click", () => {
-  increaseGrowthRate(50, upgradeCCost);
+  increaseGrowthRate(availableItems[2].rate, availableItems[2].cost);
   updateStatusDisplay(statusDiv);
   upgradeCCount += 1;
-  upgradeCCost *= 1.15;
+  availableItems[2].cost *= 1.15;
   updateUpgradeDisplay(
     upgradeButtonC,
     "Steak House",
     upgradeCCount,
-    upgradeCCost,
+    availableItems[2].cost,
   );
 });
 
@@ -165,23 +177,23 @@ function continuousGrowth() {
   requestAnimationFrame(continuousGrowth); // Request next frame
 
   // check if upgrade A is available
-  if (counter < upgradeACost) {
+  if (counter < availableItems[0].cost) {
     upgradeButtonA.disabled = true;
-  } else if (counter >= upgradeACost) {
+  } else if (counter >= availableItems[0].cost) {
     upgradeButtonA.disabled = false;
   }
 
   // check if upgrade B is available
-  if (counter < upgradeBCost) {
+  if (counter < availableItems[1].cost) {
     upgradeButtonB.disabled = true;
-  } else if (counter >= upgradeBCost) {
+  } else if (counter >= availableItems[1].cost) {
     upgradeButtonB.disabled = false;
   }
 
   // check if upgrade C is available
-  if (counter < upgradeCCost) {
+  if (counter < availableItems[2].cost) {
     upgradeButtonC.disabled = true;
-  } else if (counter >= upgradeCCost) {
+  } else if (counter >= availableItems[2].cost) {
     upgradeButtonC.disabled = false;
   }
 }
