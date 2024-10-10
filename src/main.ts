@@ -139,7 +139,7 @@ upgradeButtonA.addEventListener("click", () => {
 const upgradeButtonB: HTMLButtonElement = document.createElement("button");
 updateUpgradeDisplay(
   upgradeButtonB,
-  "Farm",
+  availableItems[1].name,
   upgradeBCount,
   availableItems[1].cost,
 );
@@ -153,7 +153,7 @@ upgradeButtonB.addEventListener("click", () => {
   availableItems[1].cost *= 1.15;
   updateUpgradeDisplay(
     upgradeButtonB,
-    "Farm",
+    availableItems[1].name,
     upgradeBCount,
     availableItems[1].cost,
   );
@@ -163,7 +163,7 @@ upgradeButtonB.addEventListener("click", () => {
 const upgradeButtonC: HTMLButtonElement = document.createElement("button");
 updateUpgradeDisplay(
   upgradeButtonC,
-  "Steak House",
+  availableItems[2].name,
   upgradeCCount,
   availableItems[2].cost,
 );
@@ -177,7 +177,7 @@ upgradeButtonC.addEventListener("click", () => {
   availableItems[2].cost *= 1.15;
   updateUpgradeDisplay(
     upgradeButtonC,
-    "Steak House",
+    availableItems[2].name,
     upgradeCCount,
     availableItems[2].cost,
   );
