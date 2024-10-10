@@ -2,7 +2,7 @@ import "./style.css";
 
 const app: HTMLDivElement = document.querySelector("#app")!;
 
-const gameName = "Frank's amazing game";
+const gameName = "Steak Clicker";
 document.title = gameName;
 
 const header = document.createElement("h1");
@@ -34,10 +34,10 @@ if (appDiv) {
 
 // function for updating counter display
 function updateCounterDisplay(div: HTMLDivElement) {
-  if (Math.floor(counter) == 1) {
-    div.innerHTML = `${Math.floor(counter)} steak`;
+  if (Math.trunc(counter*10)/10 == 1) {
+    div.innerHTML = `${Math.trunc(counter * 10) / 10} steak`;
   } else {
-    div.innerHTML = `${Math.floor(counter)} steaks`;
+    div.innerHTML = `${Math.trunc(counter * 10) / 10} steaks`;
   }
 }
 
