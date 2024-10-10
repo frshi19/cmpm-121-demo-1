@@ -34,7 +34,7 @@ if (appDiv) {
 
 // function for updating counter display
 function updateCounterDisplay(div: HTMLDivElement) {
-  if (Math.trunc(counter*10)/10 == 1) {
+  if (Math.trunc(counter * 10) / 10 == 1) {
     div.innerHTML = `${Math.trunc(counter * 10) / 10} steak`;
   } else {
     div.innerHTML = `${Math.trunc(counter * 10) / 10} steaks`;
