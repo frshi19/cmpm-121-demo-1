@@ -18,8 +18,10 @@ interface Item {
 
 const availableItems: Item[] = [
   { name: "Butcher", cost: 10, rate: 0.1 },
-  { name: "Farm", cost: 100, rate: 2 },
-  { name: "Steak House", cost: 1000, rate: 50 },
+  { name: "Steak House", cost: 100, rate: 2 },
+  { name: "Packing Plant", cost: 1000, rate: 30 },
+  { name: "Steer Slaughterer", cost: 10000, rate: 400},
+  { name: "Cattle Cloner", cost: 100000, rate: 5000},
 ];
 
 // global variables
@@ -31,6 +33,8 @@ let growthRate: number = 0;
 let upgradeACount = 0;
 let upgradeBCount = 0;
 let upgradeCCount = 0;
+let upgradeDCount = 0;
+let upgradeECount = 0;
 
 // create counter display
 const counterDiv: HTMLDivElement = document.createElement("div");
@@ -183,6 +187,61 @@ upgradeButtonC.addEventListener("click", () => {
   );
 });
 
+// create upgrade button D
+const upgradeButtonD: HTMLButtonElement = document.createElement("button");
+updateUpgradeDisplay(
+  upgradeButtonD,
+  availableItems[3].name,
+  upgradeDCount,
+  availableItems[3].cost,
+);
+if (appDiv) {
+  upgradeDiv.appendChild(upgradeButtonD);
+}
+upgradeButtonD.addEventListener("click", () => {
+  increaseGrowthRate(availableItems[3].rate, availableItems[3].cost);
+  updateStatusDisplay(statusDiv);
+  upgradeDCount += 1;
+  availableItems[3].cost *= 1.15;
+  updateUpgradeDisplay(
+    upgradeButtonD,
+    availableItems[3].name,
+    upgradeDCount,
+    availableItems[3].cost,
+  );
+});
+
+// create upgrade button E
+const upgradeButtonE: HTMLButtonElement = document.createElement("button");
+updateUpgradeDisplay(
+  upgradeButtonE,
+  availableItems[4].name,
+  upgradeECount,
+  availableItems[4].cost,
+);
+if (appDiv) {
+  upgradeDiv.appendChild(upgradeButtonE);
+}
+upgradeButtonE.addEventListener("click", () => {
+  increaseGrowthRate(availableItems[4].rate, availableItems[4].cost);
+  updateStatusDisplay(statusDiv);
+  upgradeECount += 1;
+  availableItems[4].cost *= 1.15;
+  updateUpgradeDisplay(
+    upgradeButtonE,
+    availableItems[4].name,
+    upgradeECount,
+    availableItems[4].cost,
+  );
+});
+
+// button titles/descriptions
+upgradeButtonA.title = "A cattle butchering butch butcher that creates 1 steak every 10 seconds"
+upgradeButtonB.title = "Serves fresh raw steaks straight from the source"
+upgradeButtonC.title = "Provides packed prime porterhouses with premium packaging"
+upgradeButtonD.title = "Skilled staff slaughter steers and supply select steaks"
+upgradeButtonE.title = "Clone carbon-copy cattle to cultivate continuously"
+
 // Increments steak
 function continuousGrowth() {
   const currentTimestamp = performance.now();
@@ -214,6 +273,20 @@ function continuousGrowth() {
     upgradeButtonC.disabled = true;
   } else if (counter >= availableItems[2].cost) {
     upgradeButtonC.disabled = false;
+  }
+
+  // check if upgrade D is available
+  if (counter < availableItems[3].cost) {
+    upgradeButtonD.disabled = true;
+  } else if (counter >= availableItems[3].cost) {
+    upgradeButtonD.disabled = false;
+  }
+
+  // check if upgrade E is available
+  if (counter < availableItems[4].cost) {
+    upgradeButtonE.disabled = true;
+  } else if (counter >= availableItems[4].cost) {
+    upgradeButtonE.disabled = false;
   }
 }
 
