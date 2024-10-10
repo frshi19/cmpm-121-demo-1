@@ -20,8 +20,8 @@ const availableItems: Item[] = [
   { name: "Butcher", cost: 10, rate: 0.1 },
   { name: "Steak House", cost: 100, rate: 2 },
   { name: "Packing Plant", cost: 1000, rate: 30 },
-  { name: "Steer Slaughterer", cost: 10000, rate: 400},
-  { name: "Cattle Cloner", cost: 100000, rate: 5000},
+  { name: "Steer Slaughterer", cost: 10000, rate: 400 },
+  { name: "Cattle Cloner", cost: 100000, rate: 5000 },
 ];
 
 // global variables
@@ -236,11 +236,14 @@ upgradeButtonE.addEventListener("click", () => {
 });
 
 // button titles/descriptions
-upgradeButtonA.title = "A cattle butchering butch butcher that creates 1 steak every 10 seconds"
-upgradeButtonB.title = "Serves fresh raw steaks straight from the source"
-upgradeButtonC.title = "Provides packed prime porterhouses with premium packaging"
-upgradeButtonD.title = "Skilled staff slaughter steers and supply select steaks"
-upgradeButtonE.title = "Clone carbon-copy cattle to cultivate continuously"
+upgradeButtonA.title =
+  "A cattle butchering butch butcher that creates 1 steak every 10 seconds";
+upgradeButtonB.title = "Serves fresh raw steaks straight from the source";
+upgradeButtonC.title =
+  "Provides packed prime porterhouses with premium packaging";
+upgradeButtonD.title =
+  "Skilled staff slaughter steers and supply select steaks";
+upgradeButtonE.title = "Clone carbon-copy cattle to cultivate continuously";
 
 // Increments steak
 function continuousGrowth() {
