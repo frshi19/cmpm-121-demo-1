@@ -11,17 +11,16 @@ app.append(header);
 
 // step 9 code
 interface Item {
-  name: string,
-  cost: number,
-  rate: number
-};
+  name: string;
+  cost: number;
+  rate: number;
+}
 
-const availableItems : Item[] = [
-  {name: "Butcher", cost: 10, rate: 0.1},
-  {name: "Farm", cost: 100, rate: 2},
-  {name: "Steak House", cost: 1000, rate: 50},
+const availableItems: Item[] = [
+  { name: "Butcher", cost: 10, rate: 0.1 },
+  { name: "Farm", cost: 100, rate: 2 },
+  { name: "Steak House", cost: 1000, rate: 50 },
 ];
-
 
 // global variables
 let counter: number = 0;
@@ -114,7 +113,12 @@ function updateUpgradeDisplay(
 
 // create upgrade button A
 const upgradeButtonA: HTMLButtonElement = document.createElement("button");
-updateUpgradeDisplay(upgradeButtonA, availableItems[0].name, upgradeACount, availableItems[0].cost);
+updateUpgradeDisplay(
+  upgradeButtonA,
+  availableItems[0].name,
+  upgradeACount,
+  availableItems[0].cost,
+);
 if (appDiv) {
   upgradeDiv.appendChild(upgradeButtonA);
 }
@@ -123,12 +127,22 @@ upgradeButtonA.addEventListener("click", () => {
   updateStatusDisplay(statusDiv);
   upgradeACount += 1;
   availableItems[0].cost *= 1.15;
-  updateUpgradeDisplay(upgradeButtonA, availableItems[0].name, upgradeACount, availableItems[0].cost);
+  updateUpgradeDisplay(
+    upgradeButtonA,
+    availableItems[0].name,
+    upgradeACount,
+    availableItems[0].cost,
+  );
 });
 
 // create upgrade button B
 const upgradeButtonB: HTMLButtonElement = document.createElement("button");
-updateUpgradeDisplay(upgradeButtonB, "Farm", upgradeBCount, availableItems[1].cost);
+updateUpgradeDisplay(
+  upgradeButtonB,
+  "Farm",
+  upgradeBCount,
+  availableItems[1].cost,
+);
 if (appDiv) {
   upgradeDiv.appendChild(upgradeButtonB);
 }
@@ -137,7 +151,12 @@ upgradeButtonB.addEventListener("click", () => {
   updateStatusDisplay(statusDiv);
   upgradeBCount += 1;
   availableItems[1].cost *= 1.15;
-  updateUpgradeDisplay(upgradeButtonB, "Farm", upgradeBCount, availableItems[1].cost);
+  updateUpgradeDisplay(
+    upgradeButtonB,
+    "Farm",
+    upgradeBCount,
+    availableItems[1].cost,
+  );
 });
 
 // create upgrade button C
