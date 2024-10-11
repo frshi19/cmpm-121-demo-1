@@ -24,17 +24,17 @@ const availableItems: Item[] = [
   { name: "Cattle Cloner", cost: 100000, rate: 5000 },
 ];
 
+// empty list to hold upgrade buttons
+const upgradeButtons: HTMLButtonElement[] = [];
+
 // global variables
 let counter: number = 0;
 let lastTimestamp: number = performance.now();
 const incrementPerSecond: number = 1;
 let growthRate: number = 0;
 
-let upgradeACount = 0;
-let upgradeBCount = 0;
-let upgradeCCount = 0;
-let upgradeDCount = 0;
-let upgradeECount = 0;
+// make a list of upgrade counts for each available item, so 5 items starting at 0
+const upgradeCounts: number[] = [0, 0, 0, 0, 0];
 
 // create counter display
 const counterDiv: HTMLDivElement = document.createElement("div");
@@ -76,12 +76,6 @@ if (appDiv) {
   appDiv.appendChild(button);
 }
 
-// function to increate the growth rate
-function increaseGrowthRate(amount: number, cost: number) {
-  growthRate += amount;
-  counter -= cost;
-}
-
 // create status div
 const statusDiv: HTMLDivElement = document.createElement("div");
 statusDiv.id = "status";
@@ -115,135 +109,50 @@ function updateUpgradeDisplay(
   div.innerHTML = `${upgradeName} (Count: ${count}) (Cost: ${Math.trunc(cost * 100) / 100})`;
 }
 
-// create upgrade button A
-const upgradeButtonA: HTMLButtonElement = document.createElement("button");
-updateUpgradeDisplay(
-  upgradeButtonA,
-  availableItems[0].name,
-  upgradeACount,
-  availableItems[0].cost,
-);
-if (appDiv) {
-  upgradeDiv.appendChild(upgradeButtonA);
+// function to create upgrade buttons and push them to upgradeButtons list
+function createUpgradeButton(item: Item, index: number) {
+  const upgradeButton: HTMLButtonElement = document.createElement("button");
+  upgradeButton.innerHTML = `${item.name} (Count: ${upgradeCounts[index]}) (Cost: ${item.cost})`;
+  upgradeButton.addEventListener("click", () => {
+    if (counter >= item.cost) {
+      counter -= item.cost;
+      growthRate += item.rate;
+      upgradeCounts[index]++;
+      item.cost *= 1.15;
+      updateCounterDisplay(counterDiv);
+      updateStatusDisplay(statusDiv);
+      updateUpgradeDisplay(upgradeButton, item.name, upgradeCounts[index], item.cost);
+    }
+  });
+  upgradeButtons.push(upgradeButton);
+  upgradeDiv.appendChild(upgradeButton);
 }
-upgradeButtonA.addEventListener("click", () => {
-  increaseGrowthRate(availableItems[0].rate, availableItems[0].cost);
-  updateStatusDisplay(statusDiv);
-  upgradeACount += 1;
-  availableItems[0].cost *= 1.15;
-  updateUpgradeDisplay(
-    upgradeButtonA,
-    availableItems[0].name,
-    upgradeACount,
-    availableItems[0].cost,
-  );
-});
 
-// create upgrade button B
-const upgradeButtonB: HTMLButtonElement = document.createElement("button");
-updateUpgradeDisplay(
-  upgradeButtonB,
-  availableItems[1].name,
-  upgradeBCount,
-  availableItems[1].cost,
-);
-if (appDiv) {
-  upgradeDiv.appendChild(upgradeButtonB);
+
+// function to check if upgrade is available
+function checkUpgradeAvailability(cost: number) {
+  if (counter < cost) {
+    return true;
+  } else {
+    return false;
+  }
 }
-upgradeButtonB.addEventListener("click", () => {
-  increaseGrowthRate(availableItems[1].rate, availableItems[1].cost);
-  updateStatusDisplay(statusDiv);
-  upgradeBCount += 1;
-  availableItems[1].cost *= 1.15;
-  updateUpgradeDisplay(
-    upgradeButtonB,
-    availableItems[1].name,
-    upgradeBCount,
-    availableItems[1].cost,
-  );
-});
 
-// create upgrade button C
-const upgradeButtonC: HTMLButtonElement = document.createElement("button");
-updateUpgradeDisplay(
-  upgradeButtonC,
-  availableItems[2].name,
-  upgradeCCount,
-  availableItems[2].cost,
-);
-if (appDiv) {
-  upgradeDiv.appendChild(upgradeButtonC);
+
+
+// button titles/descriptions. Iterate through upgradeButtons and set title based on name
+for (let i = 0; i < upgradeButtons.length; i++) {
+  if (upgradeButtons[i].name == "Butcher") 
+    upgradeButtons[i].title = "A cattle butchering butch butcher that creates 1 steak every 10 seconds";
+  else if (upgradeButtons[i].name == "Steak House") 
+    upgradeButtons[i].title = "Serves fresh raw steaks straight from the source";
+  else if (upgradeButtons[i].name == "Packing Plant") 
+    upgradeButtons[i].title = "Provides packed prime porterhouses with premium packaging";
+  else if (upgradeButtons[i].name == "Steer Slaughterer") 
+    upgradeButtons[i].title = "Skilled staff slaughter steers and supply select steaks";
+  else if (upgradeButtons[i].name == "Cattle Cloner") 
+    upgradeButtons[i].title = "Clone carbon-copy cattle to cultivate continuously";
 }
-upgradeButtonC.addEventListener("click", () => {
-  increaseGrowthRate(availableItems[2].rate, availableItems[2].cost);
-  updateStatusDisplay(statusDiv);
-  upgradeCCount += 1;
-  availableItems[2].cost *= 1.15;
-  updateUpgradeDisplay(
-    upgradeButtonC,
-    availableItems[2].name,
-    upgradeCCount,
-    availableItems[2].cost,
-  );
-});
-
-// create upgrade button D
-const upgradeButtonD: HTMLButtonElement = document.createElement("button");
-updateUpgradeDisplay(
-  upgradeButtonD,
-  availableItems[3].name,
-  upgradeDCount,
-  availableItems[3].cost,
-);
-if (appDiv) {
-  upgradeDiv.appendChild(upgradeButtonD);
-}
-upgradeButtonD.addEventListener("click", () => {
-  increaseGrowthRate(availableItems[3].rate, availableItems[3].cost);
-  updateStatusDisplay(statusDiv);
-  upgradeDCount += 1;
-  availableItems[3].cost *= 1.15;
-  updateUpgradeDisplay(
-    upgradeButtonD,
-    availableItems[3].name,
-    upgradeDCount,
-    availableItems[3].cost,
-  );
-});
-
-// create upgrade button E
-const upgradeButtonE: HTMLButtonElement = document.createElement("button");
-updateUpgradeDisplay(
-  upgradeButtonE,
-  availableItems[4].name,
-  upgradeECount,
-  availableItems[4].cost,
-);
-if (appDiv) {
-  upgradeDiv.appendChild(upgradeButtonE);
-}
-upgradeButtonE.addEventListener("click", () => {
-  increaseGrowthRate(availableItems[4].rate, availableItems[4].cost);
-  updateStatusDisplay(statusDiv);
-  upgradeECount += 1;
-  availableItems[4].cost *= 1.15;
-  updateUpgradeDisplay(
-    upgradeButtonE,
-    availableItems[4].name,
-    upgradeECount,
-    availableItems[4].cost,
-  );
-});
-
-// button titles/descriptions
-upgradeButtonA.title =
-  "A cattle butchering butch butcher that creates 1 steak every 10 seconds";
-upgradeButtonB.title = "Serves fresh raw steaks straight from the source";
-upgradeButtonC.title =
-  "Provides packed prime porterhouses with premium packaging";
-upgradeButtonD.title =
-  "Skilled staff slaughter steers and supply select steaks";
-upgradeButtonE.title = "Clone carbon-copy cattle to cultivate continuously";
 
 // Increments steak
 function continuousGrowth() {
@@ -255,42 +164,21 @@ function continuousGrowth() {
   updateCounterDisplay(counterDiv); // Update counter display
 
   lastTimestamp = currentTimestamp;
+  
+  //iterate through upgradeButtons and disable if not enough steaks and enable if enough steaks
+  for (let i = 0; i < upgradeButtons.length; i++) {
+    if (checkUpgradeAvailability(availableItems[i].cost)) {
+      upgradeButtons[i].disabled = true;
+    } else {
+      upgradeButtons[i].disabled = false;
+    }
+  }
+  
   requestAnimationFrame(continuousGrowth); // Request next frame
-
-  // check if upgrade A is available
-  if (counter < availableItems[0].cost) {
-    upgradeButtonA.disabled = true;
-  } else if (counter >= availableItems[0].cost) {
-    upgradeButtonA.disabled = false;
-  }
-
-  // check if upgrade B is available
-  if (counter < availableItems[1].cost) {
-    upgradeButtonB.disabled = true;
-  } else if (counter >= availableItems[1].cost) {
-    upgradeButtonB.disabled = false;
-  }
-
-  // check if upgrade C is available
-  if (counter < availableItems[2].cost) {
-    upgradeButtonC.disabled = true;
-  } else if (counter >= availableItems[2].cost) {
-    upgradeButtonC.disabled = false;
-  }
-
-  // check if upgrade D is available
-  if (counter < availableItems[3].cost) {
-    upgradeButtonD.disabled = true;
-  } else if (counter >= availableItems[3].cost) {
-    upgradeButtonD.disabled = false;
-  }
-
-  // check if upgrade E is available
-  if (counter < availableItems[4].cost) {
-    upgradeButtonE.disabled = true;
-  } else if (counter >= availableItems[4].cost) {
-    upgradeButtonE.disabled = false;
-  }
 }
 
+//create upgrade buttons for each item in availableItems
+for (let i = 0; i < availableItems.length; i++) {
+  createUpgradeButton(availableItems[i], i);
+}
 requestAnimationFrame(continuousGrowth);
