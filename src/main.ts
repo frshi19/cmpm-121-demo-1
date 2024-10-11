@@ -118,8 +118,7 @@ function createUpgradeButton(item: Item, index: number) {
     upgradeButton.title =
       "A cattle butchering butch butcher that creates 1 steak every 10 seconds";
   else if (item.name == "Steak House")
-    upgradeButton.title =
-      "Serves fresh raw steaks straight from the source";
+    upgradeButton.title = "Serves fresh raw steaks straight from the source";
   else if (item.name == "Packing Plant")
     upgradeButton.title =
       "Provides packed prime porterhouses with premium packaging";
@@ -127,8 +126,7 @@ function createUpgradeButton(item: Item, index: number) {
     upgradeButton.title =
       "Skilled staff slaughter steers and supply select steaks";
   else if (item.name == "Cattle Cloner")
-    upgradeButton.title =
-      "Clone carbon-copy cattle to cultivate continuously";
+    upgradeButton.title = "Clone carbon-copy cattle to cultivate continuously";
   upgradeButton.addEventListener("click", () => {
     if (counter >= item.cost) {
       counter -= item.cost;
