@@ -113,6 +113,22 @@ function updateUpgradeDisplay(
 function createUpgradeButton(item: Item, index: number) {
   const upgradeButton: HTMLButtonElement = document.createElement("button");
   upgradeButton.innerHTML = `${item.name} (Count: ${upgradeCounts[index]}) (Cost: ${item.cost})`;
+  // apply descriptive title to button
+  if (item.name == "Butcher")
+    upgradeButton.title =
+      "A cattle butchering butch butcher that creates 1 steak every 10 seconds";
+  else if (item.name == "Steak House")
+    upgradeButton.title =
+      "Serves fresh raw steaks straight from the source";
+  else if (item.name == "Packing Plant")
+    upgradeButton.title =
+      "Provides packed prime porterhouses with premium packaging";
+  else if (item.name == "Steer Slaughterer")
+    upgradeButton.title =
+      "Skilled staff slaughter steers and supply select steaks";
+  else if (item.name == "Cattle Cloner")
+    upgradeButton.title =
+      "Clone carbon-copy cattle to cultivate continuously";
   upgradeButton.addEventListener("click", () => {
     if (counter >= item.cost) {
       counter -= item.cost;
@@ -140,25 +156,6 @@ function checkUpgradeAvailability(cost: number) {
   } else {
     return false;
   }
-}
-
-// button titles/descriptions. Iterate through upgradeButtons and set title based on name
-for (let i = 0; i < upgradeButtons.length; i++) {
-  if (upgradeButtons[i].name == "Butcher")
-    upgradeButtons[i].title =
-      "A cattle butchering butch butcher that creates 1 steak every 10 seconds";
-  else if (upgradeButtons[i].name == "Steak House")
-    upgradeButtons[i].title =
-      "Serves fresh raw steaks straight from the source";
-  else if (upgradeButtons[i].name == "Packing Plant")
-    upgradeButtons[i].title =
-      "Provides packed prime porterhouses with premium packaging";
-  else if (upgradeButtons[i].name == "Steer Slaughterer")
-    upgradeButtons[i].title =
-      "Skilled staff slaughter steers and supply select steaks";
-  else if (upgradeButtons[i].name == "Cattle Cloner")
-    upgradeButtons[i].title =
-      "Clone carbon-copy cattle to cultivate continuously";
 }
 
 // Increments steak
