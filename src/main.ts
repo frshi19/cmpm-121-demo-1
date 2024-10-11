@@ -121,13 +121,17 @@ function createUpgradeButton(item: Item, index: number) {
       item.cost *= 1.15;
       updateCounterDisplay(counterDiv);
       updateStatusDisplay(statusDiv);
-      updateUpgradeDisplay(upgradeButton, item.name, upgradeCounts[index], item.cost);
+      updateUpgradeDisplay(
+        upgradeButton,
+        item.name,
+        upgradeCounts[index],
+        item.cost,
+      );
     }
   });
   upgradeButtons.push(upgradeButton);
   upgradeDiv.appendChild(upgradeButton);
 }
-
 
 // function to check if upgrade is available
 function checkUpgradeAvailability(cost: number) {
@@ -138,20 +142,23 @@ function checkUpgradeAvailability(cost: number) {
   }
 }
 
-
-
 // button titles/descriptions. Iterate through upgradeButtons and set title based on name
 for (let i = 0; i < upgradeButtons.length; i++) {
-  if (upgradeButtons[i].name == "Butcher") 
-    upgradeButtons[i].title = "A cattle butchering butch butcher that creates 1 steak every 10 seconds";
-  else if (upgradeButtons[i].name == "Steak House") 
-    upgradeButtons[i].title = "Serves fresh raw steaks straight from the source";
-  else if (upgradeButtons[i].name == "Packing Plant") 
-    upgradeButtons[i].title = "Provides packed prime porterhouses with premium packaging";
-  else if (upgradeButtons[i].name == "Steer Slaughterer") 
-    upgradeButtons[i].title = "Skilled staff slaughter steers and supply select steaks";
-  else if (upgradeButtons[i].name == "Cattle Cloner") 
-    upgradeButtons[i].title = "Clone carbon-copy cattle to cultivate continuously";
+  if (upgradeButtons[i].name == "Butcher")
+    upgradeButtons[i].title =
+      "A cattle butchering butch butcher that creates 1 steak every 10 seconds";
+  else if (upgradeButtons[i].name == "Steak House")
+    upgradeButtons[i].title =
+      "Serves fresh raw steaks straight from the source";
+  else if (upgradeButtons[i].name == "Packing Plant")
+    upgradeButtons[i].title =
+      "Provides packed prime porterhouses with premium packaging";
+  else if (upgradeButtons[i].name == "Steer Slaughterer")
+    upgradeButtons[i].title =
+      "Skilled staff slaughter steers and supply select steaks";
+  else if (upgradeButtons[i].name == "Cattle Cloner")
+    upgradeButtons[i].title =
+      "Clone carbon-copy cattle to cultivate continuously";
 }
 
 // Increments steak
@@ -164,7 +171,7 @@ function continuousGrowth() {
   updateCounterDisplay(counterDiv); // Update counter display
 
   lastTimestamp = currentTimestamp;
-  
+
   //iterate through upgradeButtons and disable if not enough steaks and enable if enough steaks
   for (let i = 0; i < upgradeButtons.length; i++) {
     if (checkUpgradeAvailability(availableItems[i].cost)) {
@@ -173,7 +180,7 @@ function continuousGrowth() {
       upgradeButtons[i].disabled = false;
     }
   }
-  
+
   requestAnimationFrame(continuousGrowth); // Request next frame
 }
 
