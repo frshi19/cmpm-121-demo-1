@@ -19,7 +19,9 @@ const availableItems: Item[] = [
   { name: "Cattle Cloner", cost: 100000, rate: 5000 },
 ];
 
-let counter = 0, lastTimestamp = performance.now(), growthRate = 0;
+let counter = 0,
+  lastTimestamp = performance.now(),
+  growthRate = 0;
 const upgradeCounts = new Array(availableItems.length).fill(0);
 const counterDiv = createDivElement("counterDisplay");
 const statusDiv = createDivElement("status");
@@ -27,10 +29,12 @@ const upgradeDiv = createDivElement("upgrades");
 app.append(counterDiv, createButton(), statusDiv, upgradeDiv);
 
 const descriptions: Record<string, string> = {
-  Butcher: "A cattle butchering butch butcher that creates 1 steak every 10 seconds",
+  Butcher:
+    "A cattle butchering butch butcher that creates 1 steak every 10 seconds",
   "Steak House": "Serves fresh raw steaks straight from the source",
   "Packing Plant": "Provides packed prime porterhouses with premium packaging",
-  "Steer Slaughterer": "Skilled staff slaughter steers and supply select steaks",
+  "Steer Slaughterer":
+    "Skilled staff slaughter steers and supply select steaks",
   "Cattle Cloner": "Clone carbon-copy cattle to cultivate continuously",
 };
 
@@ -57,7 +61,10 @@ function updateDisplay() {
 function createButton(): HTMLButtonElement {
   const button = document.createElement("button");
   button.innerHTML = "🥩";
-  button.addEventListener("click", () => { counter++; updateDisplay(); });
+  button.addEventListener("click", () => {
+    counter++;
+    updateDisplay();
+  });
   return button;
 }
 
