@@ -61,24 +61,25 @@ function createButton(): HTMLButtonElement {
   return button;
 }
 
-function createUpgradeButton(item: Item, index: number) {
-  const upgradeButton = document.createElement("button");
-  upgradeButton.title = descriptions[item.name];
-  upgradeDiv.appendChild(upgradeButton);
-  const update = () => {
-    upgradeButton.innerHTML = `${item.name} (Count: ${upgradeCounts[index]}) (Cost: ${Math.trunc(item.cost * 100) / 100})`;
-  };
-  upgradeButton.addEventListener("click", () => {
+function updateUpgradeButton(button: HTMLButtonElement, item: Item, index: number) {
+  button.innerHTML = `${item.name} (${upgradeCounts[index]})`;
+  button.addEventListener("click", () => {
     if (counter >= item.cost) {
       counter -= item.cost;
       growthRate += item.rate;
       upgradeCounts[index]++;
-      item.cost *= 1.15;
-      update();
+      item.cost *= 1.1;
       updateDisplay();
+      updateUpgradeButton(button, item, index);
     }
   });
-  update();
+}
+
+function createUpgradeButton(item: Item, index: number) {
+  const upgradeButton = document.createElement("button");
+  upgradeButton.title = descriptions[item.name];
+  upgradeDiv.appendChild(upgradeButton);
+  updateUpgradeButton(upgradeButton, item, index);
 }
 
 function continuousGrowth() {
