@@ -19,6 +19,8 @@ const availableItems: Item[] = [
   { name: "Cattle Cloner", cost: 100000, rate: 5000 },
 ];
 
+const costScale = 1.15;
+
 let counter = 0,
   lastTimestamp = performance.now(),
   growthRate = 0;
@@ -61,29 +63,33 @@ function createButton(): HTMLButtonElement {
   return button;
 }
 
-function updateUpgradeButton(
-  button: HTMLButtonElement,
-  item: Item,
-  index: number,
-) {
-  button.innerHTML = `${item.name} (${upgradeCounts[index]})`;
-  button.addEventListener("click", () => {
-    if (counter >= item.cost) {
-      counter -= item.cost;
-      growthRate += item.rate;
-      upgradeCounts[index]++;
-      item.cost *= 1.1;
-      updateDisplay();
-      updateUpgradeButton(button, item, index);
-    }
-  });
-}
-
 function createUpgradeButton(item: Item, index: number) {
   const upgradeButton = document.createElement("button");
   upgradeButton.title = descriptions[item.name];
   upgradeDiv.appendChild(upgradeButton);
   updateUpgradeButton(upgradeButton, item, index);
+}
+
+function updateUpgradeButton(
+  button: HTMLButtonElement,
+  item: Item,
+  index: number
+) {
+  button.innerHTML = `${item.name} (Count: ${upgradeCounts[index]}) (Cost: ${Math.trunc(item.cost * 100) / 100})`;
+  button.addEventListener("click", () => {
+    applyButtonUpgrade(button, item, index);
+  });
+}
+
+function applyButtonUpgrade(button: HTMLButtonElement, item: Item, index: number) {
+  if (counter >= item.cost) {
+    counter -= item.cost;
+    growthRate += item.rate;
+    upgradeCounts[index]++;
+    item.cost *= costScale;
+    updateDisplay();
+    updateUpgradeButton(button, item, index);
+  }
 }
 
 function continuousGrowth() {
