@@ -73,7 +73,7 @@ function createUpgradeButton(item: Item, index: number) {
 function updateUpgradeButton(
   button: HTMLButtonElement,
   item: Item,
-  index: number
+  index: number,
 ) {
   button.innerHTML = `${item.name} (Count: ${upgradeCounts[index]}) (Cost: ${Math.trunc(item.cost * 100) / 100})`;
   button.addEventListener("click", () => {
@@ -81,7 +81,11 @@ function updateUpgradeButton(
   });
 }
 
-function applyButtonUpgrade(button: HTMLButtonElement, item: Item, index: number) {
+function applyButtonUpgrade(
+  button: HTMLButtonElement,
+  item: Item,
+  index: number,
+) {
   if (counter >= item.cost) {
     counter -= item.cost;
     growthRate += item.rate;
