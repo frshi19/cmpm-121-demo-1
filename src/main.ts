@@ -23,10 +23,6 @@ let counter = 0,
   lastTimestamp = performance.now(),
   growthRate = 0;
 const upgradeCounts = new Array(availableItems.length).fill(0);
-const counterDiv = createDivElement("counterDisplay");
-const statusDiv = createDivElement("status");
-const upgradeDiv = createDivElement("upgrades");
-app.append(counterDiv, createButton(), statusDiv, upgradeDiv);
 
 const descriptions: Record<string, string> = {
   Butcher:
@@ -37,9 +33,6 @@ const descriptions: Record<string, string> = {
     "Skilled staff slaughter steers and supply select steaks",
   "Cattle Cloner": "Clone carbon-copy cattle to cultivate continuously",
 };
-
-availableItems.forEach((item, i) => createUpgradeButton(item, i));
-requestAnimationFrame(continuousGrowth);
 
 function createDivElement(id: string): HTMLDivElement {
   const div = document.createElement("div");
@@ -96,3 +89,11 @@ function continuousGrowth() {
   updateDisplay();
   requestAnimationFrame(continuousGrowth);
 }
+
+const counterDiv = createDivElement("counterDisplay");
+const statusDiv = createDivElement("status");
+const upgradeDiv = createDivElement("upgrades");
+
+app.append(counterDiv, createButton(), statusDiv, upgradeDiv);
+availableItems.forEach((item, i) => createUpgradeButton(item, i));
+requestAnimationFrame(continuousGrowth);
