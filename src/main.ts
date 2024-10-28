@@ -61,7 +61,11 @@ function createButton(): HTMLButtonElement {
   return button;
 }
 
-function updateUpgradeButton(button: HTMLButtonElement, item: Item, index: number) {
+function updateUpgradeButton(
+  button: HTMLButtonElement,
+  item: Item,
+  index: number,
+) {
   button.innerHTML = `${item.name} (${upgradeCounts[index]})`;
   button.addEventListener("click", () => {
     if (counter >= item.cost) {
