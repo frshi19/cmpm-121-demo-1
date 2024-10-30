@@ -112,7 +112,6 @@ function continuousGrowth() {
 // set body background color to db5050
 document.body.style.backgroundColor = "#db5050"; // Inspiration: https://rozy-dixon.github.io/cmpm-121-demo-1/
 
-
 const counterDiv = createDivElement("counterDisplay");
 counterDiv.style.fontSize = "50px";
 const statusDiv = createDivElement("status");
