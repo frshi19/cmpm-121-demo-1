@@ -1,7 +1,7 @@
 import "./style.css";
 
 const app: HTMLDivElement = document.querySelector("#app")!;
-const gameName = "Steak Clicker";
+const gameName = "Steak Cutter";
 document.title = gameName;
 app.innerHTML = `<h1>${gameName}</h1>`;
 
@@ -56,6 +56,10 @@ function updateDisplay() {
 function createButton(): HTMLButtonElement {
   const button = document.createElement("button");
   button.innerHTML = "🥩";
+  button.style.fontSize = "100px"; // Inspiration: https://shawn-sw.github.io/cmpm-121-demo-1/
+  button.style.backgroundColor = "transparent";
+  button.style.border = "none";
+  button.style.outline = "none";
   button.addEventListener("click", () => {
     counter++;
     updateDisplay();
@@ -105,8 +109,14 @@ function continuousGrowth() {
   requestAnimationFrame(continuousGrowth);
 }
 
+// set body background color to db5050
+document.body.style.backgroundColor = "#db5050"; // Inspiration: https://rozy-dixon.github.io/cmpm-121-demo-1/
+
+
 const counterDiv = createDivElement("counterDisplay");
+counterDiv.style.fontSize = "50px";
 const statusDiv = createDivElement("status");
+statusDiv.style.fontSize = "20px";
 const upgradeDiv = createDivElement("upgrades");
 
 app.append(counterDiv, createButton(), statusDiv, upgradeDiv);
